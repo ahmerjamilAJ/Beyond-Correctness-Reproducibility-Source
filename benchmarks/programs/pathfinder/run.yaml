@@ -1,0 +1,50 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=c++17
+  - -O1
+  expected_exit_code: 0
+  id: pathfinder
+  inputs:
+  - args:
+    - benchmarks/programs/pathfinder/inputs/valleys.txt
+    id: valleys
+    oracle_path: benchmarks/programs/pathfinder/oracles/valleys.stdout
+    oracle_sha256: a164852d955afce1327bf3c60aca7db80fcf9b2abcdad5cb2fed97aedde9c08e
+  - args:
+    - benchmarks/programs/pathfinder/inputs/barriers.txt
+    id: barriers
+    oracle_path: benchmarks/programs/pathfinder/oracles/barriers.stdout
+    oracle_sha256: 90236381ea53265e8b31e5b5040e0dd210c76a19b0333ae6f4fddebb44810949
+  - args:
+    - benchmarks/programs/pathfinder/inputs/shifted.txt
+    id: shifted
+    oracle_path: benchmarks/programs/pathfinder/oracles/shifted.stdout
+    oracle_sha256: 368b8dd67046ca70b86ac5a3a4cf7f3369bbdb42b4a513a1d6ade1b0cf73575f
+  - args:
+    - benchmarks/programs/pathfinder/inputs/corridor.txt
+    id: corridor
+    oracle_path: benchmarks/programs/pathfinder/oracles/corridor.stdout
+    oracle_sha256: d7d72daf0ce995364090f189ad317feb901861279da8437b0033bf18fe7dbc32
+  language: c++
+  link_flags:
+  - -lm
+  - -lstdc++
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/pathfinder/pathfinder.cpp
+  source_sha256_at_freeze: 77dcab62d0d66eb2ec38283aebabc6d23ad709902e3fbcc5c5ef6506a47c5c93
+  stderr: empty

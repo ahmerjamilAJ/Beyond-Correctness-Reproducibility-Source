@@ -1,0 +1,60 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu++17
+  - -O1
+  - -g
+  expected_exit_code: 0
+  id: needle
+  inputs:
+  - args:
+    - '32'
+    - '10'
+    - '1'
+    id: nominal_a
+    oracle_path: benchmarks/programs/needle/oracles/nominal_a.result
+    oracle_sha256: b048dbd3e885e74ccd644164d512f0a7d1840451c814c0e0b3f44541b576c547
+  - args:
+    - '32'
+    - '5'
+    - '1'
+    id: nominal_b
+    oracle_path: benchmarks/programs/needle/oracles/nominal_b.result
+    oracle_sha256: b048dbd3e885e74ccd644164d512f0a7d1840451c814c0e0b3f44541b576c547
+  - args:
+    - '64'
+    - '10'
+    - '1'
+    id: scale
+    oracle_path: benchmarks/programs/needle/oracles/scale.result
+    oracle_sha256: 207287fabda99bdb0d14a555d9f9660ba1874a45c6bb80619833ae034f9ac7de
+  - args:
+    - '16'
+    - '1'
+    - '1'
+    id: boundary
+    oracle_path: benchmarks/programs/needle/oracles/boundary.result
+    oracle_sha256: b6856de494605bbabe841cf8c0f54cde434bfbbf29ce49d28c0aa422897a0e78
+  language: c++
+  link_flags:
+  - -lm
+  - -lstdc++
+  output:
+    comparator: exact_bytes
+    kind: file
+    path: result.txt
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/needle/needle.cpp
+  source_sha256_at_freeze: 61ec3b6ace990b920194441c84916151cb6b690ad1752b70c634ae8102ce7ca3
+  stderr: empty

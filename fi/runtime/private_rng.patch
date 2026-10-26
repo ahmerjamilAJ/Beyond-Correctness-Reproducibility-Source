@@ -1,0 +1,81 @@
+--- /opt/llfi-llvm15-v2/src/FaultInjectionLib.c
++++ project/src/FaultInjectionLib.c
+@@ -6,6 +6,7 @@
+ #include <assert.h>
+ 
+ #include "Utils.h"
++#include "LLFIPrivateRNG.h"
+ #define OPTION_LENGTH 512
+ /*BEHROOZ: We assume that the maximum number of fault injection locations is 100 when
+ it comes to multiple bit-flip model.*/
+@@ -61,16 +62,27 @@
+  */
+ void _initRandomSeed() {
+   unsigned int seed;
+-	FILE* urandom = fopen("/dev/urandom", "r");
+-	fread(&seed, sizeof(int), 1, urandom);
+-	fclose(urandom);
+-	srand(seed);
++  FILE *urandom = fopen("/dev/urandom", "rb");
++  if (urandom == NULL) {
++    fprintf(stderr, "LLFI private RNG: cannot open entropy source\n");
++    exit(1);
++  }
++  if (fread(&seed, sizeof(seed), 1, urandom) != 1) {
++    fclose(urandom);
++    fprintf(stderr, "LLFI private RNG: cannot read complete entropy seed\n");
++    exit(1);
++  }
++  if (fclose(urandom) != 0) {
++    fprintf(stderr, "LLFI private RNG: cannot close entropy source\n");
++    exit(1);
++  }
++  llfi_private_seed(seed);
+ }
+ 
+ // get whether to make decision based on probability
+ // return true at the probability of the param: probability
+ bool _getDecision(double probability) {
+-  return (rand() / (RAND_MAX * 1.0)) <= probability;
++  return llfi_private_decision(probability);
+ }
+ 
+ void _parseLLFIConfigFile() {
+@@ -234,6 +246,10 @@
+   if (! fiFlag) return;
+   start_tracing_flag = TRACING_FI_RUN_FAULT_INSERTED; //Tell instTraceLib that we have injected a fault
+ 
++  if (size == 0 || (config.fi_bit >= 0 && (unsigned)config.fi_bit >= size)) {
++    fprintf(stderr, "LLFI private RNG: invalid zero width or explicit bit outside result width\n");
++    exit(1);
++  }
+   unsigned fi_bit, fi_bytepos, fi_bitpos;
+   unsigned char oldbuf;
+ 
+@@ -258,7 +274,7 @@
+ 	  {
+ 	    //======== Add opcode_str QINING @MAR 11th========
+ 	    do{
+-	    	fi_bit = rand() / (RAND_MAX * 1.0) * size;
++	    	fi_bit = llfi_private_bounded(size);
+ 	    }while(score_board[fi_bit] == 1);
+ 	    score_board[fi_bit] = 1;
+ 	    //================================================
+@@ -274,13 +290,13 @@
+     if (config.fi_ml_layer_num > 0)
+       fprintf(injectedfaultsFile,
+           "FI stat: fi_type=%s, fi_max_multiple=%d, fi_index=%ld, fi_cycle=%lld, fi_reg_index=%u, "
+-          "fi_reg_pos=%u, fi_reg_width=%u, fi_bit=%u, opcode=%s, ml_layer_name=%s, ml_layer_num=%d\n", config.fi_type, config.fi_max_multiple,
+-          llfi_index, fi_cycle_to_print, my_reg_index, reg_pos, size, fi_bit, opcode_str, config.fi_ml_layer_name, config.fi_ml_layer_num);
++          "fi_reg_pos=%u, fi_reg_width=%u, fi_bit=%u, opcode=%s, ml_layer_name=%s, ml_layer_num=%d, bc_rng_variant=private_rand_r_v1, bc_rng_initial_seed=%u, bc_rng_draw_count=%llu\n", config.fi_type, config.fi_max_multiple,
++          llfi_index, fi_cycle_to_print, my_reg_index, reg_pos, size, fi_bit, opcode_str, config.fi_ml_layer_name, config.fi_ml_layer_num, llfi_private_rng_initial_seed, llfi_private_rng_draw_count);
+     else
+       fprintf(injectedfaultsFile,
+             "FI stat: fi_type=%s, fi_max_multiple=%d, fi_index=%ld, fi_cycle=%lld, fi_reg_index=%u, "
+-            "fi_reg_pos=%u, fi_reg_width=%u, fi_bit=%u, opcode=%s\n", config.fi_type, config.fi_max_multiple,
+-            llfi_index, fi_cycle_to_print, my_reg_index, reg_pos, size, fi_bit, opcode_str);
++            "fi_reg_pos=%u, fi_reg_width=%u, fi_bit=%u, opcode=%s, bc_rng_variant=private_rand_r_v1, bc_rng_initial_seed=%u, bc_rng_draw_count=%llu\n", config.fi_type, config.fi_max_multiple,
++            llfi_index, fi_cycle_to_print, my_reg_index, reg_pos, size, fi_bit, opcode_str, llfi_private_rng_initial_seed, llfi_private_rng_draw_count);
+ 	  /*BEHROOZ: The below line is substituted with the above one as there was an
+            issue when we wanted to both inject in multiple bits and multiple
+            locations.

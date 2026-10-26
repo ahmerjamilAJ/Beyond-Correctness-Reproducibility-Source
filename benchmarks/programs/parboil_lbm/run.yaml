@@ -1,0 +1,61 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  - -DSPEC_CPU
+  expected_exit_code: 0
+  id: parboil_lbm
+  inputs:
+  - args:
+    - '1'
+    id: nominal_a
+    oracle_path: benchmarks/programs/parboil_lbm/oracles/nominal_a.bin
+    oracle_sha256: 68143e78db14230fb9419ccdbff0cb429ac96bad4e56f1c746b08a6d022b4897
+    stdout_oracle_path: benchmarks/programs/parboil_lbm/oracles/nominal_a.stdout
+    stdout_oracle_sha256: 736d783fd3af8d79f922eebc14aa775e13b1f9cec31960a2759eb22e82679b24
+  - args:
+    - '2'
+    id: nominal_b
+    oracle_path: benchmarks/programs/parboil_lbm/oracles/nominal_b.bin
+    oracle_sha256: 0fc5a47e250e4b27dfd9fe2cc25f229b5cc1b5d5dddde045b1c2c99a7c6e67d9
+    stdout_oracle_path: benchmarks/programs/parboil_lbm/oracles/nominal_b.stdout
+    stdout_oracle_sha256: a21f5f9d5a9690d2717d61dbfdbe3ba82247462d788fc8fa80fe2716f93ee82c
+  - args:
+    - '3'
+    id: scale
+    oracle_path: benchmarks/programs/parboil_lbm/oracles/scale.bin
+    oracle_sha256: 400b0c777dda934ce66e18ac2ad9118f1c5350fc5482d83237fec094352a3fb5
+    stdout_oracle_path: benchmarks/programs/parboil_lbm/oracles/scale.stdout
+    stdout_oracle_sha256: 2f6f38c3a056a319140da0515d503a5d1fa06412d02651e792472f8e7f6cbb16
+  - args:
+    - '4'
+    id: boundary
+    oracle_path: benchmarks/programs/parboil_lbm/oracles/boundary.bin
+    oracle_sha256: b21099ad6db0306f8d67a4e9e8ca15d02ae9762596e60e02dceccaf6688dee3a
+    stdout_oracle_path: benchmarks/programs/parboil_lbm/oracles/boundary.stdout
+    stdout_oracle_sha256: 5c19bcac0ecca4fecbbbe426f46f19e8d88df4f94d1101eb10b78402ac9f02ce
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: file
+    path: lbm.bin
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/parboil_lbm/lbm.c
+  source_sha256_at_freeze: 58196ba2244a9e489feef4a2e44104011f74667b46d74e8596a894e33c1c1409
+  stderr: empty

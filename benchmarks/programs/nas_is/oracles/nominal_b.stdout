@@ -1,0 +1,22 @@
+
+
+ NAS Parallel Benchmarks (NPB3.3-SER) - IS Benchmark
+
+ Size:  65536  (class S)
+ Iterations:   5
+
+
+ IS Benchmark Completed
+ Class           =                        S
+ Size            =                    65536
+ Iterations      =                        5
+ Operation type  =              keys ranked
+ Verification    =               SUCCESSFUL
+ Version         =                      3.3
+
+
+ Please send all errors/feedbacks to:
+
+ NPB Development Team
+ npb@nas.nasa.gov
+

@@ -1,0 +1,11 @@
+This directory contains LLTFI generic runtime source derived from
+DependableSystemsLab/LLTFI, revision66dad0d3314ab72eeb82384fc21066f88615b358.
+Upstream license and credits are in ../../licenses/.
+
+FaultInjectionLib.c is modified to use the added LLFIPrivateRNG.h,
+process-private random state, bounded bit selection, checked entropy reads
+and explicit delivery markers. private_rng.patch records those modifications.
+Instruction.def is regenerated for the LLVM15 opcode numbering, retaining
+unit event weights. Other retained source files preserve their original bytes.
+
+Only the generic shared runtime needed by the supplied FI runner is retained.

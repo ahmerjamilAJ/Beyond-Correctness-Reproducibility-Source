@@ -1,0 +1,73 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  - -DOUTPUT
+  expected_exit_code: 0
+  id: rodinia_lavamd
+  inputs:
+  - args:
+    - -cores
+    - '1'
+    - -boxes1d
+    - '1'
+    id: nominal_a
+    oracle_path: benchmarks/programs/rodinia_lavamd/oracles/nominal_a.bin
+    oracle_sha256: d8a8d470606c4fd23087d4b222a7f66dc6286e1390c3cb181273f765bed916ad
+    stdout_oracle_path: benchmarks/programs/rodinia_lavamd/oracles/nominal_a.stdout
+    stdout_oracle_sha256: 4706023e522a95a1980e29f40d86eb20cd3f1f7c4969cb020db664531f03e008
+  - args:
+    - -cores
+    - '1'
+    - -boxes1d
+    - '2'
+    id: nominal_b
+    oracle_path: benchmarks/programs/rodinia_lavamd/oracles/nominal_b.bin
+    oracle_sha256: db682e5ae93919cb226c8389ca80c2befbd4cbd9f1fc327dcd4d09d1a1965b93
+    stdout_oracle_path: benchmarks/programs/rodinia_lavamd/oracles/nominal_b.stdout
+    stdout_oracle_sha256: c5350c286d33e639acf9c95d47b7e277974d6998798bb551b903f2d0de9a9428
+  - args:
+    - -cores
+    - '1'
+    - -boxes1d
+    - '3'
+    id: scale
+    oracle_path: benchmarks/programs/rodinia_lavamd/oracles/scale.bin
+    oracle_sha256: 674b4fc09fd881c219c950d8f523fc04d3e6d4d48bb24bd25fa7b92b48b4c37d
+    stdout_oracle_path: benchmarks/programs/rodinia_lavamd/oracles/scale.stdout
+    stdout_oracle_sha256: 026377a6b19503c917bf747acca0068e8c2f3a9a6f2f2d1524093ccb8f9cb723
+  - args:
+    - -cores
+    - '1'
+    - -boxes1d
+    - '4'
+    id: boundary
+    oracle_path: benchmarks/programs/rodinia_lavamd/oracles/boundary.bin
+    oracle_sha256: 38e73cfd0fb7d9d5633608a580a513279d022aa48628648f8363a968d19596d2
+    stdout_oracle_path: benchmarks/programs/rodinia_lavamd/oracles/boundary.stdout
+    stdout_oracle_sha256: dc522f44e424a0b720a3b08c0eb764960c20913ecb3e528ea65380ae667857d5
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: file
+    path: result.txt
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/rodinia_lavamd/lavamd.c
+  source_sha256_at_freeze: a7638767b22865512aa7eda3d4a222f1d0c478112ec35c18d0b19a08e917046c
+  stderr: empty

@@ -1,0 +1,53 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  - -DSMALL_DATASET
+  - -DPOLYBENCH_DUMP_ARRAYS
+  expected_exit_code: 0
+  id: polybench_durbin
+  inputs:
+  - args:
+    - '2'
+    id: nominal_a
+    oracle_path: benchmarks/programs/polybench_durbin/oracles/nominal_a.stdout
+    oracle_sha256: d86b79c04c274d30bfd9ee6ccfbb9883f249bdf4160e62b2a45b01aca27e7700
+  - args:
+    - '3'
+    id: nominal_b
+    oracle_path: benchmarks/programs/polybench_durbin/oracles/nominal_b.stdout
+    oracle_sha256: 6fa54fbb49db2afac77149338f3787c82badd0b3ad227a99e4adcc56acdf16e7
+  - args:
+    - '4'
+    id: scale
+    oracle_path: benchmarks/programs/polybench_durbin/oracles/scale.stdout
+    oracle_sha256: eaa1153a488cf9fe999be76548da98bdadffc8ab165de0068f1a141c888d183d
+  - args:
+    - '1'
+    id: boundary
+    oracle_path: benchmarks/programs/polybench_durbin/oracles/boundary.stdout
+    oracle_sha256: d10ce7934be2b318feac5e0e36a849183eb2b7cd9ab79031e4dd470a73e310e8
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/polybench_durbin/durbin.c
+  source_sha256_at_freeze: d47c423351bdef8c7e356445378d6ed3666f9ead5c112407af5d9681ab3c8bf9
+  stderr: empty

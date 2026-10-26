@@ -1,0 +1,1 @@
+Implement the supplied C++ function contract. Return only the requested JSON. Do not claim to have run tests, profiling or fault injection.

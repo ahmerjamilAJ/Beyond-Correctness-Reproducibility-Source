@@ -1,0 +1,80 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  expected_exit_code: 0
+  id: rodinia_bptree
+  inputs:
+  - args:
+    - cores
+    - '1'
+    - file
+    - benchmarks/programs/rodinia_bptree/inputs/nominal_a.keys
+    - command
+    - benchmarks/programs/rodinia_bptree/inputs/nominal_a.commands
+    id: nominal_a
+    oracle_path: benchmarks/programs/rodinia_bptree/oracles/nominal_a.bin
+    oracle_sha256: e510dcf8d485789610a72696a7c752e84dd3965b570e1e68592aab417a5c367a
+    stdout_oracle_path: benchmarks/programs/rodinia_bptree/oracles/nominal_a.stdout
+    stdout_oracle_sha256: 6c8ddf1181da512f8d30459210f5c6787fc1aceea286e91518872ce356f25370
+  - args:
+    - cores
+    - '1'
+    - file
+    - benchmarks/programs/rodinia_bptree/inputs/nominal_b.keys
+    - command
+    - benchmarks/programs/rodinia_bptree/inputs/nominal_b.commands
+    id: nominal_b
+    oracle_path: benchmarks/programs/rodinia_bptree/oracles/nominal_b.bin
+    oracle_sha256: a5103b89f69a5a3aa5355d7e0da9b39cb61860a70e1491de594f18614b983bb0
+    stdout_oracle_path: benchmarks/programs/rodinia_bptree/oracles/nominal_b.stdout
+    stdout_oracle_sha256: 6c8ddf1181da512f8d30459210f5c6787fc1aceea286e91518872ce356f25370
+  - args:
+    - cores
+    - '1'
+    - file
+    - benchmarks/programs/rodinia_bptree/inputs/scale.keys
+    - command
+    - benchmarks/programs/rodinia_bptree/inputs/scale.commands
+    id: scale
+    oracle_path: benchmarks/programs/rodinia_bptree/oracles/scale.bin
+    oracle_sha256: 7cfa932571bbdc394a235a54422b4329dfbba61111181bacb4fc7ecd481344b5
+    stdout_oracle_path: benchmarks/programs/rodinia_bptree/oracles/scale.stdout
+    stdout_oracle_sha256: 6c8ddf1181da512f8d30459210f5c6787fc1aceea286e91518872ce356f25370
+  - args:
+    - cores
+    - '1'
+    - file
+    - benchmarks/programs/rodinia_bptree/inputs/boundary.keys
+    - command
+    - benchmarks/programs/rodinia_bptree/inputs/boundary.commands
+    id: boundary
+    oracle_path: benchmarks/programs/rodinia_bptree/oracles/boundary.bin
+    oracle_sha256: f2913cc8a8036ce589e6d3791e558ed40e317113cbb2b0ae4e91a286eb4f1486
+    stdout_oracle_path: benchmarks/programs/rodinia_bptree/oracles/boundary.stdout
+    stdout_oracle_sha256: 6c8ddf1181da512f8d30459210f5c6787fc1aceea286e91518872ce356f25370
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: file
+    path: bptree.txt
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/rodinia_bptree/bptree.c
+  source_sha256_at_freeze: 004d4f0458c868f3905ece26a71d7bb75689e291f835324e2bafa22bc70fba64
+  stderr: empty

@@ -1,0 +1,64 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  expected_exit_code: 0
+  id: parboil_spmv
+  inputs:
+  - args:
+    - benchmarks/programs/parboil_spmv/inputs/nominal_a.jds
+    - benchmarks/programs/parboil_spmv/inputs/nominal_a.vec
+    id: nominal_a
+    oracle_path: benchmarks/programs/parboil_spmv/oracles/nominal_a.bin
+    oracle_sha256: 198ae2a48154dc00de735ed8fbf003e60744555f76e2aeb98ef8b700b7a265a7
+    stdout_oracle_path: benchmarks/programs/parboil_spmv/oracles/nominal_a.stdout
+    stdout_oracle_sha256: 3059543faaca92b12affd218d654930eede0fe286f8def0a758b1b645c134347
+  - args:
+    - benchmarks/programs/parboil_spmv/inputs/nominal_b.jds
+    - benchmarks/programs/parboil_spmv/inputs/nominal_b.vec
+    id: nominal_b
+    oracle_path: benchmarks/programs/parboil_spmv/oracles/nominal_b.bin
+    oracle_sha256: c986b3da5ba41475f102cd3b45bfad1bd68e8a8a6b4da1a4a92710894091afe6
+    stdout_oracle_path: benchmarks/programs/parboil_spmv/oracles/nominal_b.stdout
+    stdout_oracle_sha256: 3059543faaca92b12affd218d654930eede0fe286f8def0a758b1b645c134347
+  - args:
+    - benchmarks/programs/parboil_spmv/inputs/scale.jds
+    - benchmarks/programs/parboil_spmv/inputs/scale.vec
+    id: scale
+    oracle_path: benchmarks/programs/parboil_spmv/oracles/scale.bin
+    oracle_sha256: 0c121cf39ae6f5cc27eeafbcb68c316ddfeab3c093e27fe49d54ae5a449079c7
+    stdout_oracle_path: benchmarks/programs/parboil_spmv/oracles/scale.stdout
+    stdout_oracle_sha256: 3059543faaca92b12affd218d654930eede0fe286f8def0a758b1b645c134347
+  - args:
+    - benchmarks/programs/parboil_spmv/inputs/boundary.jds
+    - benchmarks/programs/parboil_spmv/inputs/boundary.vec
+    id: boundary
+    oracle_path: benchmarks/programs/parboil_spmv/oracles/boundary.bin
+    oracle_sha256: a888822d426666154a0f4b73f24cdcb9f60a294ce8ae872732f76a4aa2ee8060
+    stdout_oracle_path: benchmarks/programs/parboil_spmv/oracles/boundary.stdout
+    stdout_oracle_sha256: 3059543faaca92b12affd218d654930eede0fe286f8def0a758b1b645c134347
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: file
+    path: spmv.bin
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/parboil_spmv/spmv.c
+  source_sha256_at_freeze: 544bcc4d8e38bbb1e9fbdcc57dbc19cb868acfa886891180fac4cd992b5024c3
+  stderr: empty

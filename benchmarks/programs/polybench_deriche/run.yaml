@@ -1,0 +1,53 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  - -DSMALL_DATASET
+  - -DPOLYBENCH_DUMP_ARRAYS
+  expected_exit_code: 0
+  id: polybench_deriche
+  inputs:
+  - args:
+    - '2'
+    id: nominal_a
+    oracle_path: benchmarks/programs/polybench_deriche/oracles/nominal_a.stdout
+    oracle_sha256: 4963a18367ed1cab8f31a6af8c3d5b2808c88c16d8fc503a03c10b08e43e75ad
+  - args:
+    - '3'
+    id: nominal_b
+    oracle_path: benchmarks/programs/polybench_deriche/oracles/nominal_b.stdout
+    oracle_sha256: 4d8d9e327189014e5ac670dfb816878c7551c5f3670e961cc692fed616d6f845
+  - args:
+    - '4'
+    id: scale
+    oracle_path: benchmarks/programs/polybench_deriche/oracles/scale.stdout
+    oracle_sha256: 9b5837c27f37f0ba5f24e00e0778241f50589baa27f63d897158432f02fcf4a5
+  - args:
+    - '1'
+    id: boundary
+    oracle_path: benchmarks/programs/polybench_deriche/oracles/boundary.stdout
+    oracle_sha256: 0c18b8392588a3f355666f66c3563a5cd859764cbce0fb0a00fa86760ba02c16
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/polybench_deriche/deriche.c
+  source_sha256_at_freeze: 346a89f75c01a4bc1209bd6fded984e8bd25714c8155eb308a9301edb2aa80b9
+  stderr: empty

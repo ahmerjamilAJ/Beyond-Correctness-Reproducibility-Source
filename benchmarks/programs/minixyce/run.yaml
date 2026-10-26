@@ -1,0 +1,104 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu++11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  - -DMINIXYCE_INFO=0
+  expected_exit_code: 0
+  id: minixyce
+  inputs:
+  - args:
+    - -c
+    - benchmarks/programs/minixyce/inputs/nominal_a.net
+    - -ti
+    - '0'
+    - -h
+    - '0.1'
+    - -tf
+    - '0.2'
+    - -tol
+    - 1e-8
+    - -k
+    - '8'
+    - -max_restarts
+    - '4'
+    id: nominal_a
+    oracle_path: benchmarks/programs/minixyce/oracles/nominal_a.stdout
+    oracle_sha256: 66b5675a3bf2a1760a62802e1fb7bb8f8dc33dbe06a406d9774492abfe966d1b
+  - args:
+    - -c
+    - benchmarks/programs/minixyce/inputs/nominal_b.net
+    - -ti
+    - '0'
+    - -h
+    - '0.1'
+    - -tf
+    - '0.2'
+    - -tol
+    - 1e-8
+    - -k
+    - '8'
+    - -max_restarts
+    - '4'
+    id: nominal_b
+    oracle_path: benchmarks/programs/minixyce/oracles/nominal_b.stdout
+    oracle_sha256: 40958bf30f8420819280f423417d32d70d004fedb65a384824db2ce037d9b09c
+  - args:
+    - -c
+    - benchmarks/programs/minixyce/inputs/scale.net
+    - -ti
+    - '0'
+    - -h
+    - '0.1'
+    - -tf
+    - '0.2'
+    - -tol
+    - 1e-8
+    - -k
+    - '8'
+    - -max_restarts
+    - '4'
+    id: scale
+    oracle_path: benchmarks/programs/minixyce/oracles/scale.stdout
+    oracle_sha256: f5a53e4d351c8f8440f9c372aefae90f6affe602ed4741340533d75062a3203c
+  - args:
+    - -c
+    - benchmarks/programs/minixyce/inputs/boundary.net
+    - -ti
+    - '0'
+    - -h
+    - '0.1'
+    - -tf
+    - '0.2'
+    - -tol
+    - 1e-8
+    - -k
+    - '8'
+    - -max_restarts
+    - '4'
+    id: boundary
+    oracle_path: benchmarks/programs/minixyce/oracles/boundary.stdout
+    oracle_sha256: 3572100b614f8cf612423acbbde3a2706b4ce2b87fcb646956beb33a6ca521cf
+  language: c++
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/minixyce/minixyce.cpp
+  source_sha256_at_freeze: 8280270119f5dddd587ffeef541c27abb40594e267c8d091ed0d5e41e40d7228
+  stderr: empty

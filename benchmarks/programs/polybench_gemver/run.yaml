@@ -1,0 +1,53 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  - -DSMALL_DATASET
+  - -DPOLYBENCH_DUMP_ARRAYS
+  expected_exit_code: 0
+  id: polybench_gemver
+  inputs:
+  - args:
+    - '2'
+    id: nominal_a
+    oracle_path: benchmarks/programs/polybench_gemver/oracles/nominal_a.stdout
+    oracle_sha256: 8c3e30723881f8b48cf15c3e676c7e1de28669c704c7970ed76b1a3e0823219e
+  - args:
+    - '3'
+    id: nominal_b
+    oracle_path: benchmarks/programs/polybench_gemver/oracles/nominal_b.stdout
+    oracle_sha256: f9772a7fc4e349b60c63eebf1b68909f0cc0f1f3a6a017137d72807b6fbdf19e
+  - args:
+    - '4'
+    id: scale
+    oracle_path: benchmarks/programs/polybench_gemver/oracles/scale.stdout
+    oracle_sha256: 86aba6d4b7a2f7cfee4bc76e45a1c6bbc533d91dbd3e3b0e78a6efeb8c04f6eb
+  - args:
+    - '1'
+    id: boundary
+    oracle_path: benchmarks/programs/polybench_gemver/oracles/boundary.stdout
+    oracle_sha256: 0b7517c4102cc2d9deef67e65ff2dfa74ff8604df474269a0fe4033317e239f8
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/polybench_gemver/gemver.c
+  source_sha256_at_freeze: 3a18f07f55af5ad67e90ae6cc91835141f8b7326c6e0829024d4185a4675aa56
+  stderr: empty

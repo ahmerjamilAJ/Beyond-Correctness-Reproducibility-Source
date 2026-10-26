@@ -1,0 +1,64 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  expected_exit_code: 0
+  id: parboil_sad
+  inputs:
+  - args:
+    - benchmarks/programs/parboil_sad/inputs/nominal_a.0.bin
+    - benchmarks/programs/parboil_sad/inputs/nominal_a.1.bin
+    id: nominal_a
+    oracle_path: benchmarks/programs/parboil_sad/oracles/nominal_a.bin
+    oracle_sha256: ff9605f2ef72a218ce8552f7b614d67d8c5a74a809ef65b9b973a7e9d4ff9075
+    stdout_oracle_path: benchmarks/programs/parboil_sad/oracles/nominal_a.stdout
+    stdout_oracle_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  - args:
+    - benchmarks/programs/parboil_sad/inputs/nominal_b.0.bin
+    - benchmarks/programs/parboil_sad/inputs/nominal_b.1.bin
+    id: nominal_b
+    oracle_path: benchmarks/programs/parboil_sad/oracles/nominal_b.bin
+    oracle_sha256: af7b56e4bb646421e650adec1be6843ab49468021566573538494675d36852c2
+    stdout_oracle_path: benchmarks/programs/parboil_sad/oracles/nominal_b.stdout
+    stdout_oracle_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  - args:
+    - benchmarks/programs/parboil_sad/inputs/scale.0.bin
+    - benchmarks/programs/parboil_sad/inputs/scale.1.bin
+    id: scale
+    oracle_path: benchmarks/programs/parboil_sad/oracles/scale.bin
+    oracle_sha256: dd8da827c689d727fbd468d03b25a1e4eb592ca01ec968b06f407c2d5786b889
+    stdout_oracle_path: benchmarks/programs/parboil_sad/oracles/scale.stdout
+    stdout_oracle_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  - args:
+    - benchmarks/programs/parboil_sad/inputs/boundary.0.bin
+    - benchmarks/programs/parboil_sad/inputs/boundary.1.bin
+    id: boundary
+    oracle_path: benchmarks/programs/parboil_sad/oracles/boundary.bin
+    oracle_sha256: 794855dff9a5fd312069bf0a67fbebb0c688c27b4501e899a5cbc07f4d2699e5
+    stdout_oracle_path: benchmarks/programs/parboil_sad/oracles/boundary.stdout
+    stdout_oracle_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: file
+    path: sad.bin
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/parboil_sad/sad.c
+  source_sha256_at_freeze: ffc2adcfef56f8e164e61945e93f5a8f9bce3f8d8ae0511bd40375a4b057757f
+  stderr: empty

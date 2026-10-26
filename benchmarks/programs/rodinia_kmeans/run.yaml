@@ -1,0 +1,71 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  expected_exit_code: 0
+  id: rodinia_kmeans
+  inputs:
+  - args:
+    - -i
+    - benchmarks/programs/rodinia_kmeans/inputs/nominal_a.txt
+    - -k
+    - '3'
+    - -t
+    - '0.001'
+    id: nominal_a
+    oracle_path: benchmarks/programs/rodinia_kmeans/oracles/nominal_a.stdout
+    oracle_sha256: dbce00d6f1bf8bbe4d9d84ddb03a6ade00e54deef482106b4114e40ade08ebe2
+  - args:
+    - -i
+    - benchmarks/programs/rodinia_kmeans/inputs/nominal_b.txt
+    - -k
+    - '3'
+    - -t
+    - '0.001'
+    id: nominal_b
+    oracle_path: benchmarks/programs/rodinia_kmeans/oracles/nominal_b.stdout
+    oracle_sha256: f40c95b46c396aadb0c81e19ad5b097681f91f7cda3f53be2cf30e9dee3f95b0
+  - args:
+    - -i
+    - benchmarks/programs/rodinia_kmeans/inputs/scale.txt
+    - -k
+    - '3'
+    - -t
+    - '0.001'
+    id: scale
+    oracle_path: benchmarks/programs/rodinia_kmeans/oracles/scale.stdout
+    oracle_sha256: 192ad356e7e7efc4a2f1a3ccc1eb4258ef83f3470aec1dc1b62f9f00638f2b18
+  - args:
+    - -i
+    - benchmarks/programs/rodinia_kmeans/inputs/boundary.txt
+    - -k
+    - '3'
+    - -t
+    - '0.001'
+    id: boundary
+    oracle_path: benchmarks/programs/rodinia_kmeans/oracles/boundary.stdout
+    oracle_sha256: 67da18558f00fffe0fe60d42de53e6319528d57a40a93a3f4173e0b22af9bb86
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/rodinia_kmeans/kmeans.c
+  source_sha256_at_freeze: a21c78904ca94064639ab725e1ffa89a8bdbf5ff7371131403d72a9a717757b5
+  stderr: empty

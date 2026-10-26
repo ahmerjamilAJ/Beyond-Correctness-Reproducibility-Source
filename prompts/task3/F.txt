@@ -1,0 +1,17 @@
+Rank every selectable region ID by protection usefulness. Consider propagation to the declared output,masking or overwriting,shared corrupted operands,and added execution cost. Target20%native execution overhead.
+
+PROGRAM AND FIXED STATIC ACTIONS
+{{PAYLOAD_JSON_01}}
+
+PROTECTION AND EVALUATION CONTRACT
+Each action duplicates one fixed original scalar operation from its current operands and compares bitwise. Shared corrupted inputs can escape both copies. A mismatch prints BC_DETECTED on stderr and exits0;this is detected failure,not correction. Eligible added operations are fault exposed. One result bit is perturbed at one eligible dynamic LLVM operation. Excluded opcodes are ret,alloca,call,phi,store,br,switch,unreachable;external dynamic library bodies are outside compiled instrumentation. The whole compiled translation unit is evaluated;the declared observable,not all internal state,defines corruption. Later independent random FI measures the selected protected program. Timing uses whole native invocation including launch and output completion. Prefixes1,2,4,8,16,and all available actions are compiled and clean-checked. A cost-only screen and independent confirmation choose the largest feasible prefix. The same ordering is also evaluated at40%,50%,70%budgets;this is budget transfer,not a separate budget-conditioned model response. Invalid/abstaining/failed correctness/failed cost choices retain the exact original. No alternate prefix is searched after confirmation failure. All four input configurations have equal evaluation weight;file contents and expected output bytes are omitted. No tool execution is available.
+
+MATCHED REPRESENTATIVE FI FEEDBACK
+Thirty faults per reached operation/input give coarse conditional susceptibility,not whole-region or whole-program probabilities. Zero observed corruption does not establish safety. Unreached inputs are NA,not zero susceptibility. Feedback informs selection only;its observations are excluded from protected-program evaluation.
+{{PAYLOAD_JSON_02}}
+
+RESPONSE CONTRACT
+Return exactly {{RESPONSE_SKELETON_JSON}}. ranked_regions must contain every selectable ID exactly once in your order. Give a brief explanation of at most80words. To abstain use ranked_regions=[],abstain=true. Do not edit source or invent actions,measurements or test results.
+
+COMPLETE REGISTERED SOURCE(line numbers are annotations)
+{{NUMBERED_SOURCE}}

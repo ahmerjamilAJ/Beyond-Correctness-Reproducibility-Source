@@ -1,0 +1,40 @@
+Initial condition specified: 0
+Mini-Application Name: miniXyce
+Mini-Application Version: 1.1
+Parameter_parsing_time: 0
+Netlist_parsing_time: 0
+Netlist_file: nominal_b.net
+Circuit_attributes: 
+  Number_of_devices: 5
+  Resistors_(R): 2
+  Capacitors_(C): 2
+Matrix_attributes: 
+  Global_rows: 4
+  Rows_per_proc_MIN: 4
+  Rows_per_proc_MAX: 4
+  Rows_per_proc_AVG: 4
+  Global_overlap_rows: 0
+  Rows_overlap_per_proc_MIN: 0
+  Rows_overlap_per_proc_MAX: 0
+  Rows_overlap_per_proc_AVG: 0
+  Global_NNZ: 9
+  NNZ_per_proc_MIN: 9
+  NNZ_per_proc_MAX: 9
+  NNZ_per_proc_AVG: 9
+DCOP Calculation: 
+  Init_cond_specified: 0
+  GMRES_tolerance: 1e-08
+  GMRES_subspace_dim: 8
+  GMRES_iterations: 4
+  GMRES_restarts: 0
+  GMRES_native_residual: 1.98603e-15
+  DCOP_calculation_time: 0
+Transient Calculation: 
+  Number_of_time_steps: 1
+  Time_start: 0
+  Time_end: 0.2
+  Time_step: 0.1
+  Matrix_setup_time: 0
+  Residual_load_time: 0
+  Jacobian_load_time: 0
+  Jacobian_assembly_time: 0

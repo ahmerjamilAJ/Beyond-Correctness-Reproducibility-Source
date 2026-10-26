@@ -1,0 +1,20 @@
+For each region,consider whether a perturbed value can reach the declared output, whether later computation masks or overwrites it,and whether the outcome instead causes detection,crash or timeout. Return the probability of recorded output corruption.
+
+COMMON FAULT AND OUTPUT CONTRACT
+For each of the four fixed inputs,choose uniformly among reached eligible static sites in the region,then uniformly among that site's executed occurrences. A single destination result bit follows the named runtime law below. Average inputs equally. This is conditional on the specified regional site sampler,not uniform whole-program dynamic-event sampling. Corruption means violation of the complete declared observable contract on the runner's normal-output path. Crash,timeout and recognized stderr detection are separate non-corruption outcomes. A low corruption probability does not establish correct completion or safe internal state. Eligible instruction results exclude ret,alloca,call,phi,store,br,switch,unreachable. Region spans share an existing catalog selected using clean reachability;that shared selection does not imply that all sites in the span execute. Only mapped reachable eligible results are sampled. No measured FI rates,outcome labels,expected output bytes or tool access are supplied. External input files are descriptors only;their values are unavailable. Source is complete for the registered file;implementation includes are not expanded. Line numbers are presentation annotations,not part of the source. Do not claim to execute code.
+
+PROGRAM AND INPUT DESCRIPTORS
+{{PAYLOAD_JSON_01}}
+
+NAMED EVALUATION SAMPLER
+{{PAYLOAD_JSON_02}}
+
+STATIC FEATURES(no clean execution counts)
+{{PAYLOAD_JSON_03}}
+
+RESPONSE CONTRACT
+Give probabilities without requested explanations. For every region use reason=null,evidence_lines=[],mechanisms=[],including when p_sdc is numerical. Allowed mechanism tags:output_dependence,error_masking,repeated_updates,control_decisions,arithmetic_sensitivity,input_uncertainty,other. Return only the JSON object below. Replace null p_sdc by a finite number in[0,1] when you can estimate it,or retain null to abstain. Include every region exactly once. Keep the same fields;no extra fields.
+{{PAYLOAD_JSON_04}}
+
+COMPLETE REGISTERED SOURCE
+{{NUMBERED_SOURCE}}

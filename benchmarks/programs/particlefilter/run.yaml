@@ -1,0 +1,78 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  expected_exit_code: 0
+  id: particlefilter
+  inputs:
+  - args:
+    - -x
+    - '32'
+    - -y
+    - '32'
+    - -z
+    - '4'
+    - -np
+    - '100'
+    id: nominal_a
+    oracle_path: benchmarks/programs/particlefilter/oracles/nominal_a.stdout
+    oracle_sha256: f8c5d676227bb26618aee3c74f01b85580700a971db8b71ab55511705c6585cc
+  - args:
+    - -x
+    - '48'
+    - -y
+    - '48'
+    - -z
+    - '6'
+    - -np
+    - '250'
+    id: nominal_b
+    oracle_path: benchmarks/programs/particlefilter/oracles/nominal_b.stdout
+    oracle_sha256: ab1cf79b48702f2fdf961235e8be170e7ebb3da9bc6cfd1765ca3fb39b662b84
+  - args:
+    - -x
+    - '128'
+    - -y
+    - '128'
+    - -z
+    - '10'
+    - -np
+    - '1000'
+    id: scale
+    oracle_path: benchmarks/programs/particlefilter/oracles/scale.stdout
+    oracle_sha256: d8b0290198b9cc80ccf8744087877dbe437a9821ecc0f928fffdaf30686686f7
+  - args:
+    - -x
+    - '96'
+    - -y
+    - '96'
+    - -z
+    - '8'
+    - -np
+    - '750'
+    id: boundary
+    oracle_path: benchmarks/programs/particlefilter/oracles/boundary.stdout
+    oracle_sha256: c6a5cd952b22befc0bbb776a0a72791074716cfa8b437de8b651a307eb214ae0
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/particlefilter/particlefilter.c
+  source_sha256_at_freeze: 18e36ea1b8e6c08e9fd8926a4df0219d9e9a3dd7fd83d7b39648e48501e12fed
+  stderr: empty

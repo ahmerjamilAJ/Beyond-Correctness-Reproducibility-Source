@@ -1,0 +1,53 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  - -DSMALL_DATASET
+  - -DPOLYBENCH_DUMP_ARRAYS
+  expected_exit_code: 0
+  id: polybench_cholesky
+  inputs:
+  - args:
+    - '2'
+    id: nominal_a
+    oracle_path: benchmarks/programs/polybench_cholesky/oracles/nominal_a.stdout
+    oracle_sha256: 7e79837b60eb44458b689507668c24dfb6fdb7b1b5a3ff098a0e0005bcb1861c
+  - args:
+    - '3'
+    id: nominal_b
+    oracle_path: benchmarks/programs/polybench_cholesky/oracles/nominal_b.stdout
+    oracle_sha256: d07b44354caaa781d080aed425df979a50ad0bb91d3d243af74136f4a111b364
+  - args:
+    - '4'
+    id: scale
+    oracle_path: benchmarks/programs/polybench_cholesky/oracles/scale.stdout
+    oracle_sha256: a8022269c62e1eda34b7acf205913c4ba57e2b73e14b0f88af174265fc2a054d
+  - args:
+    - '1'
+    id: boundary
+    oracle_path: benchmarks/programs/polybench_cholesky/oracles/boundary.stdout
+    oracle_sha256: 3c2fc21c72521f5c9db02f5a59f3162a66748317660c9192000b9ec5ff589033
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/polybench_cholesky/cholesky.c
+  source_sha256_at_freeze: c810801f0a5c33df057564ae573be6a99105b5f6cf45315ae0e2e091c5f633d6
+  stderr: empty

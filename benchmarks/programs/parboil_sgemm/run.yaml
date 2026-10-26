@@ -1,0 +1,64 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu++11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  expected_exit_code: 0
+  id: parboil_sgemm
+  inputs:
+  - args:
+    - benchmarks/programs/parboil_sgemm/inputs/nominal_a.A
+    - benchmarks/programs/parboil_sgemm/inputs/nominal_a.BT
+    id: nominal_a
+    oracle_path: benchmarks/programs/parboil_sgemm/oracles/nominal_a.bin
+    oracle_sha256: 43f5522043a39cd8bc6c2f964b6226f9e12a045c0e6b264272188f3836cf0adc
+    stdout_oracle_path: benchmarks/programs/parboil_sgemm/oracles/nominal_a.stdout
+    stdout_oracle_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  - args:
+    - benchmarks/programs/parboil_sgemm/inputs/nominal_b.A
+    - benchmarks/programs/parboil_sgemm/inputs/nominal_b.BT
+    id: nominal_b
+    oracle_path: benchmarks/programs/parboil_sgemm/oracles/nominal_b.bin
+    oracle_sha256: b56d7503df5f95409230fd6269a2cec578e643ea20a8f294d4c5c7f0fc1b49f2
+    stdout_oracle_path: benchmarks/programs/parboil_sgemm/oracles/nominal_b.stdout
+    stdout_oracle_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  - args:
+    - benchmarks/programs/parboil_sgemm/inputs/scale.A
+    - benchmarks/programs/parboil_sgemm/inputs/scale.BT
+    id: scale
+    oracle_path: benchmarks/programs/parboil_sgemm/oracles/scale.bin
+    oracle_sha256: d8c9dfd316896e7bd219fe214d46222d5a7795c21ea95b6b228814c249cc2ed5
+    stdout_oracle_path: benchmarks/programs/parboil_sgemm/oracles/scale.stdout
+    stdout_oracle_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  - args:
+    - benchmarks/programs/parboil_sgemm/inputs/boundary.A
+    - benchmarks/programs/parboil_sgemm/inputs/boundary.BT
+    id: boundary
+    oracle_path: benchmarks/programs/parboil_sgemm/oracles/boundary.bin
+    oracle_sha256: 2e3b75198b5f099858b46a4e60b73b37df2d7e6178750fb62157439736d18cef
+    stdout_oracle_path: benchmarks/programs/parboil_sgemm/oracles/boundary.stdout
+    stdout_oracle_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  language: c++
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: file
+    path: sgemm.txt
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/parboil_sgemm/sgemm.cpp
+  source_sha256_at_freeze: cb2f3f2f3d7575db8c3b552d16e8c5c21dd8afe65dcc6269c1ec2c9d182f6371
+  stderr: empty

@@ -1,0 +1,50 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  expected_exit_code: 0
+  id: mibench_telecomm_adpcm
+  inputs:
+  - args:
+    - benchmarks/programs/mibench_telecomm_adpcm/inputs/nominal_a.adpcm
+    id: nominal_a
+    oracle_path: benchmarks/programs/mibench_telecomm_adpcm/oracles/nominal_a.stdout
+    oracle_sha256: 10701a9a18e597bf1f85a093e15f4d39399a2e012bc6bf9c3a3565639034196e
+  - args:
+    - benchmarks/programs/mibench_telecomm_adpcm/inputs/nominal_b.adpcm
+    id: nominal_b
+    oracle_path: benchmarks/programs/mibench_telecomm_adpcm/oracles/nominal_b.stdout
+    oracle_sha256: 3ef75b4f909e03dd4604c4694b40fcb2e834b1706842917c71465a8599e5825c
+  - args:
+    - benchmarks/programs/mibench_telecomm_adpcm/inputs/scale.adpcm
+    id: scale
+    oracle_path: benchmarks/programs/mibench_telecomm_adpcm/oracles/scale.stdout
+    oracle_sha256: e006275d6dbc6fe4bdc75347eae9ae0be7bf36912f50837bea25e3ce18284e36
+  - args:
+    - benchmarks/programs/mibench_telecomm_adpcm/inputs/boundary.adpcm
+    id: boundary
+    oracle_path: benchmarks/programs/mibench_telecomm_adpcm/oracles/boundary.stdout
+    oracle_sha256: 2be560871e7e030f2c92929c353462138aa9976f2ba3e8bce650cc9ea9353712
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/mibench_telecomm_adpcm/telecomm_adpcm.c
+  source_sha256_at_freeze: c952117d8339b02a06e344c0b9f804d428dee5377ad49d516ae2191bcbcf1653
+  stderr: empty

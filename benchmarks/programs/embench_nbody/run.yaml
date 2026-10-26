@@ -1,0 +1,51 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  expected_exit_code: 0
+  id: embench_nbody
+  inputs:
+  - args:
+    - benchmarks/programs/embench_nbody/inputs/nominal_a.in
+    id: nominal_a
+    oracle_path: benchmarks/programs/embench_nbody/oracles/nominal_a.stdout
+    oracle_sha256: 49eddfc60e0eff06edcf2027683929ec001947f46171de57467d5ebb35bde98c
+  - args:
+    - benchmarks/programs/embench_nbody/inputs/nominal_b.in
+    id: nominal_b
+    oracle_path: benchmarks/programs/embench_nbody/oracles/nominal_b.stdout
+    oracle_sha256: 0606582b4fc9c138751778fe1f201b3c42bbd4874615d79a3038ab93f69b3e4b
+  - args:
+    - benchmarks/programs/embench_nbody/inputs/scale.in
+    id: scale
+    oracle_path: benchmarks/programs/embench_nbody/oracles/scale.stdout
+    oracle_sha256: 32b33c63ff2a37ce9b478abc0a492dcaf1e40f797aba62c1613372e2ea247ed8
+  - args:
+    - benchmarks/programs/embench_nbody/inputs/boundary.in
+    id: boundary
+    oracle_path: benchmarks/programs/embench_nbody/oracles/boundary.stdout
+    oracle_sha256: fab99f74eecfafbcc2a8354b1fa103fe58036bf5f5252afcb8aeaabb27ad3bdc
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/embench_nbody/embench_nbody.c
+  source_sha256_at_freeze: 18c582e0294ebe9d34aec51e680c71e26a54621db5904d63a3da09c7dde0efa9
+  stderr: empty

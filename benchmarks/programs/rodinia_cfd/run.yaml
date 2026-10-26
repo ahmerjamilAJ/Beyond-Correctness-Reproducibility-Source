@@ -1,0 +1,51 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu++11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  expected_exit_code: 0
+  id: rodinia_cfd
+  inputs:
+  - args:
+    - benchmarks/programs/rodinia_cfd/inputs/nominal_a.mesh
+    id: nominal_a
+    oracle_path: benchmarks/programs/rodinia_cfd/oracles/nominal_a.stdout
+    oracle_sha256: dcdb62cbf8153b6d67254f788a156cc6fb9333e029a88a68cf11b6a6c7987c6e
+  - args:
+    - benchmarks/programs/rodinia_cfd/inputs/nominal_b.mesh
+    id: nominal_b
+    oracle_path: benchmarks/programs/rodinia_cfd/oracles/nominal_b.stdout
+    oracle_sha256: b7a118d8241643c1a7843c6410668da6dc6f8e99d6fd87b30d83d896a32e5b63
+  - args:
+    - benchmarks/programs/rodinia_cfd/inputs/scale.mesh
+    id: scale
+    oracle_path: benchmarks/programs/rodinia_cfd/oracles/scale.stdout
+    oracle_sha256: aba8375d0ff34771b123dbf80be9aaffac04876e154c9abc89b1626a1c05d028
+  - args:
+    - benchmarks/programs/rodinia_cfd/inputs/boundary.mesh
+    id: boundary
+    oracle_path: benchmarks/programs/rodinia_cfd/oracles/boundary.stdout
+    oracle_sha256: 6315233a8c3095eed6996033544783d970dc8476dd65c8a69c986b84794abf38
+  language: c++
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/rodinia_cfd/euler3d.cpp
+  source_sha256_at_freeze: cdb02cfd91e1f8e590eee0cb1642627028b782957b570d81bfea799853bd39c8
+  stderr: empty

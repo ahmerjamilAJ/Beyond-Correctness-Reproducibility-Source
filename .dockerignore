@@ -1,0 +1,8 @@
+runs
+build
+.git
+.venv
+__pycache__
+*.gguf
+*.safetensors
+*.log

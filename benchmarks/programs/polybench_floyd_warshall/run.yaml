@@ -1,0 +1,53 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  - -DSMALL_DATASET
+  - -DPOLYBENCH_DUMP_ARRAYS
+  expected_exit_code: 0
+  id: polybench_floyd_warshall
+  inputs:
+  - args:
+    - '2'
+    id: nominal_a
+    oracle_path: benchmarks/programs/polybench_floyd_warshall/oracles/nominal_a.stdout
+    oracle_sha256: 8551c95fc8da8052061e80c7c9ea5af1a056d8ee08bcbaf30db26918edff7891
+  - args:
+    - '3'
+    id: nominal_b
+    oracle_path: benchmarks/programs/polybench_floyd_warshall/oracles/nominal_b.stdout
+    oracle_sha256: 3022aa5f86852a7e83065c1bc9a08d944f97ae82d5cf794b22b81c084c138347
+  - args:
+    - '4'
+    id: scale
+    oracle_path: benchmarks/programs/polybench_floyd_warshall/oracles/scale.stdout
+    oracle_sha256: bd2d530e3482c582d0230686e21c6508f05f6c42b70d64edfd34412fb7445b96
+  - args:
+    - '1'
+    id: boundary
+    oracle_path: benchmarks/programs/polybench_floyd_warshall/oracles/boundary.stdout
+    oracle_sha256: 74b3acd200a651ff16d27bb0103f725d7a7339034269e5338ecb6955c590339d
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/polybench_floyd_warshall/floyd_warshall.c
+  source_sha256_at_freeze: 0ae1382310c068cdd65512ca88b7c64a60b1e4487cba3ff6517c5cb461fe0208
+  stderr: empty

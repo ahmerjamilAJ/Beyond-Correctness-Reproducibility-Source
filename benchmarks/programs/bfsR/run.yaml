@@ -1,0 +1,50 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=c++17
+  - -O1
+  expected_exit_code: 0
+  id: bfsR
+  inputs:
+  - args:
+    - benchmarks/programs/bfsR/inputs/branches.txt
+    id: branches
+    oracle_path: benchmarks/programs/bfsR/oracles/branches.stdout
+    oracle_sha256: c10808ace9a1cdb254cbf827d36d9ffd12ab6ec20ed8f047f25e00940b239557
+  - args:
+    - benchmarks/programs/bfsR/inputs/cycles.txt
+    id: cycles
+    oracle_path: benchmarks/programs/bfsR/oracles/cycles.stdout
+    oracle_sha256: 04c5ca1dfba61224c84528af0db67e51d9bf729c80e327c6b2008760f1e66dce
+  - args:
+    - benchmarks/programs/bfsR/inputs/layered.txt
+    id: layered
+    oracle_path: benchmarks/programs/bfsR/oracles/layered.stdout
+    oracle_sha256: 01ae690129798b087d43e38271f71d9c4c6e996fd78591a5b52aff9368143829
+  - args:
+    - benchmarks/programs/bfsR/inputs/disconnected.txt
+    id: disconnected
+    oracle_path: benchmarks/programs/bfsR/oracles/disconnected.stdout
+    oracle_sha256: 1aa356e4a968956130a7bf370b0b65f5b1d6f8d06baf740934be3c294ecfe8ef
+  language: c++
+  link_flags:
+  - -lm
+  - -lstdc++
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/bfsR/bfs.cpp
+  source_sha256_at_freeze: ad9642c71d45eefeb3dca47b220665aa81eb5a500149bf0e32549e385ac8c575
+  stderr: empty

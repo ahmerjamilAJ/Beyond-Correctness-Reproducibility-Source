@@ -1,0 +1,18 @@
+MAIN_printInfo:
+	grid size      : 8 x 8 x 8 = 0.00 * 10^6 Cells
+	nTimeSteps     : 1
+	result file    : lbm.bin
+	action         : store
+	simulation type: lid-driven cavity
+	obstacle file  : <none>
+
+LBM_showGridStatistics:
+	nObstacleCells:     296 nAccelCells:      32 nFluidCells:     184
+	minRho:   1.0000 maxRho:   1.0000 mass: 5.120001e+02
+	minU: 0.000000e+00 maxU: 0.000000e+00
+
+LBM_showGridStatistics:
+	nObstacleCells:     296 nAccelCells:      32 nFluidCells:     184
+	minRho:   0.9966 maxRho:   1.0034 mass: 5.120004e+02
+	minU: 0.000000e+00 maxU: 7.000713e-03
+

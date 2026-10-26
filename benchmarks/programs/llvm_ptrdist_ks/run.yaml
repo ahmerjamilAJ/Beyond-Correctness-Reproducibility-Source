@@ -1,0 +1,50 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  expected_exit_code: 0
+  id: llvm_ptrdist_ks
+  inputs:
+  - args:
+    - benchmarks/programs/llvm_ptrdist_ks/inputs/nominal_a.in
+    id: nominal_a
+    oracle_path: benchmarks/programs/llvm_ptrdist_ks/oracles/nominal_a.stdout
+    oracle_sha256: fc345248c21b15c11f88fc740dd33ea72695d596285780e739fd1d54e06c8cba
+  - args:
+    - benchmarks/programs/llvm_ptrdist_ks/inputs/nominal_b.in
+    id: nominal_b
+    oracle_path: benchmarks/programs/llvm_ptrdist_ks/oracles/nominal_b.stdout
+    oracle_sha256: 1500c399791b9f77dd439ffbe0a29f465e33718038dd840cbc05a63a07141635
+  - args:
+    - benchmarks/programs/llvm_ptrdist_ks/inputs/scale.in
+    id: scale
+    oracle_path: benchmarks/programs/llvm_ptrdist_ks/oracles/scale.stdout
+    oracle_sha256: 9ce3e1c77de5daed624930868cd3f160ee779355db47422f407487cf3d8a1625
+  - args:
+    - benchmarks/programs/llvm_ptrdist_ks/inputs/boundary.in
+    id: boundary
+    oracle_path: benchmarks/programs/llvm_ptrdist_ks/oracles/boundary.stdout
+    oracle_sha256: f65e1784de8d75d1c8ce47b7072e5f2a563cd98806ed518989ea77be75440120
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/llvm_ptrdist_ks/ks.c
+  source_sha256_at_freeze: 04fdf03a432e3e1e0c043ec05bebea92e502592322419436996fc221981f56c8
+  stderr: empty

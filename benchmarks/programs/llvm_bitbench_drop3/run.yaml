@@ -1,0 +1,51 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  expected_exit_code: 0
+  id: llvm_bitbench_drop3
+  inputs:
+  - args:
+    - benchmarks/programs/llvm_bitbench_drop3/inputs/nominal_a.bin
+    id: nominal_a
+    oracle_path: benchmarks/programs/llvm_bitbench_drop3/oracles/nominal_a.stdout
+    oracle_sha256: 8a7f988ae17206b3ada2280cc45898eecf64d1ff7df5635dac0d5f677aa274a4
+  - args:
+    - benchmarks/programs/llvm_bitbench_drop3/inputs/nominal_b.bin
+    id: nominal_b
+    oracle_path: benchmarks/programs/llvm_bitbench_drop3/oracles/nominal_b.stdout
+    oracle_sha256: d5f716cf102b3d6cea39d4d2b1e0596075e4785aabf8f55038bb1972f3f1c915
+  - args:
+    - benchmarks/programs/llvm_bitbench_drop3/inputs/scale.bin
+    id: scale
+    oracle_path: benchmarks/programs/llvm_bitbench_drop3/oracles/scale.stdout
+    oracle_sha256: 7296210bcfc32afc8c8a7700550595fdab705e2d5cedab4ec17fa5c0a9a3e82f
+  - args:
+    - benchmarks/programs/llvm_bitbench_drop3/inputs/boundary.bin
+    id: boundary
+    oracle_path: benchmarks/programs/llvm_bitbench_drop3/oracles/boundary.stdout
+    oracle_sha256: f02f92411abf42afb215469d24940610f5c0860ff35fa811add287f55c39b493
+  language: c
+  link_flags: []
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/llvm_bitbench_drop3/drop3.c
+  source_sha256_at_freeze: 56d9d89ad91f7c00ce1fd403787245a2796f927e5cbb363fcc2f03c5ae530e66
+  stderr: empty
+  upstream_source_files_sha256:
+    benchmarks/programs/llvm_bitbench_drop3/upstream/drop3.c: 2bb5ba8b0fc221a0ba9ca622231c7d0710efc7bebf036b50aab609bae961a236

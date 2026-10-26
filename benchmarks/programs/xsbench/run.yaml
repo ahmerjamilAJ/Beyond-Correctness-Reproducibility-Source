@@ -1,0 +1,64 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  expected_exit_code: 0
+  id: xsbench
+  inputs:
+  - args:
+    - -g
+    - '50'
+    - -l
+    - '1000'
+    id: nominal_a
+    oracle_path: benchmarks/programs/xsbench/oracles/nominal_a.bin
+    oracle_sha256: e75527861940ca37b0d002be5d91d8f99bcc5b6128fb64265b5f72faa0f1683f
+  - args:
+    - -g
+    - '100'
+    - -l
+    - '1000'
+    id: nominal_b
+    oracle_path: benchmarks/programs/xsbench/oracles/nominal_b.bin
+    oracle_sha256: 9d62df403897f677b281983cf28e4e603e8613fd4cd359eb809f431083b8365d
+  - args:
+    - -g
+    - '250'
+    - -l
+    - '1000'
+    id: scale
+    oracle_path: benchmarks/programs/xsbench/oracles/scale.bin
+    oracle_sha256: 19497ca376e26c545dbba4ec4f7c7018bb2328584e3ef5af413fafde1d1c6798
+  - args:
+    - -g
+    - '50'
+    - -l
+    - '500'
+    id: boundary
+    oracle_path: benchmarks/programs/xsbench/oracles/boundary.bin
+    oracle_sha256: cb52bd8ae652e2441fb65103bbcac57dfa1a8586a98cf844c4e67efbee67daf2
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: file
+    path: result.bin
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/xsbench/xsbench.c
+  source_sha256_at_freeze: d61a112bbd55d1fa99ed6be1393bc6d32467caa1da57a6984b2b254ca8c13f6f
+  stderr: empty

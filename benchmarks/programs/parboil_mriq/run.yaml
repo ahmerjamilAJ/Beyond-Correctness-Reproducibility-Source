@@ -1,0 +1,60 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu++11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  expected_exit_code: 0
+  id: parboil_mriq
+  inputs:
+  - args:
+    - benchmarks/programs/parboil_mriq/inputs/nominal_a.bin
+    id: nominal_a
+    oracle_path: benchmarks/programs/parboil_mriq/oracles/nominal_a.bin
+    oracle_sha256: f4a249ee0a887dc514b00102fe8597a5c98df981d6f9e8ef28fd8d3424e9b798
+    stdout_oracle_path: benchmarks/programs/parboil_mriq/oracles/nominal_a.stdout
+    stdout_oracle_sha256: 765c91ea6463cc48c08f568a4a897dfb8869d97c2aecb2cd25bb690b9ebbfd28
+  - args:
+    - benchmarks/programs/parboil_mriq/inputs/nominal_b.bin
+    id: nominal_b
+    oracle_path: benchmarks/programs/parboil_mriq/oracles/nominal_b.bin
+    oracle_sha256: e8527cff6060ce3577cd821d540a138ee999a1dd5b34939de7a6fb16e643f1f7
+    stdout_oracle_path: benchmarks/programs/parboil_mriq/oracles/nominal_b.stdout
+    stdout_oracle_sha256: a96af59fa9ce1f0d1924b6d66dcf0dcbc6c4fdbf91285633a991b9aee7aca712
+  - args:
+    - benchmarks/programs/parboil_mriq/inputs/scale.bin
+    id: scale
+    oracle_path: benchmarks/programs/parboil_mriq/oracles/scale.bin
+    oracle_sha256: f45d9fec745bf22dc6285d506bf26ba487723cb0e9ed9600330be65dd24e98ca
+    stdout_oracle_path: benchmarks/programs/parboil_mriq/oracles/scale.stdout
+    stdout_oracle_sha256: 2bbda12aefaec64680b2fdd04c3a7015578003ffe2032c61414293583742f0c5
+  - args:
+    - benchmarks/programs/parboil_mriq/inputs/boundary.bin
+    id: boundary
+    oracle_path: benchmarks/programs/parboil_mriq/oracles/boundary.bin
+    oracle_sha256: 967e693f3c8828b2b0e9bd774c723d8616eb02c51c0119bef89768c538984030
+    stdout_oracle_path: benchmarks/programs/parboil_mriq/oracles/boundary.stdout
+    stdout_oracle_sha256: 092371c998104c044ef69bb17ca33ad841a4a60aec135ed9d8050fc80db53743
+  language: c++
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: file
+    path: mriq.bin
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/parboil_mriq/mriq.cpp
+  source_sha256_at_freeze: f3a83b0bf850a86fe0dbc5d7b783e9da12e502f45b92f4e7021ea60756962f64
+  stderr: empty

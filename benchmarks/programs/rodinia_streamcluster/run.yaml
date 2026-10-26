@@ -1,0 +1,92 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu++11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  expected_exit_code: 0
+  id: rodinia_streamcluster
+  inputs:
+  - args:
+    - '2'
+    - '5'
+    - '4'
+    - '24'
+    - '24'
+    - '24'
+    - none
+    - centers.txt
+    - '1'
+    id: nominal_a
+    oracle_path: benchmarks/programs/rodinia_streamcluster/oracles/nominal_a.bin
+    oracle_sha256: 35f1fd50227201ba5f326a1e28dcf59bdabf4c66de62dfbcc65a47129e14fc78
+    stdout_oracle_path: benchmarks/programs/rodinia_streamcluster/oracles/nominal_a.stdout
+    stdout_oracle_sha256: f5bdd0f4ed8128a62a6b080ae57e505b11b3497f71302d50c2617e8868201f23
+  - args:
+    - '2'
+    - '5'
+    - '4'
+    - '32'
+    - '32'
+    - '32'
+    - none
+    - centers.txt
+    - '1'
+    id: nominal_b
+    oracle_path: benchmarks/programs/rodinia_streamcluster/oracles/nominal_b.bin
+    oracle_sha256: ad3151b9727a1e78d80dc3f9ee5ee4005d41e0f1cbf6e00441933e505b257393
+    stdout_oracle_path: benchmarks/programs/rodinia_streamcluster/oracles/nominal_b.stdout
+    stdout_oracle_sha256: 7b3fc36a730cf1af91078ff6ea761d48e40fd5429a9db6e3f9de10d167660e15
+  - args:
+    - '2'
+    - '5'
+    - '8'
+    - '48'
+    - '48'
+    - '48'
+    - none
+    - centers.txt
+    - '1'
+    id: scale
+    oracle_path: benchmarks/programs/rodinia_streamcluster/oracles/scale.bin
+    oracle_sha256: f859ea86267cf3974334861754badcd5fe42c5d076ffecbd0e32248f2648ad62
+    stdout_oracle_path: benchmarks/programs/rodinia_streamcluster/oracles/scale.stdout
+    stdout_oracle_sha256: 4f14176c415504aed410991b8303d5139e4ac6271b9fea651edf7204e5d2f988
+  - args:
+    - '2'
+    - '5'
+    - '8'
+    - '64'
+    - '64'
+    - '64'
+    - none
+    - centers.txt
+    - '1'
+    id: boundary
+    oracle_path: benchmarks/programs/rodinia_streamcluster/oracles/boundary.bin
+    oracle_sha256: 14602a564b05a587e75eda93604062130024299420ef42ef5e5145cdfb014c96
+    stdout_oracle_path: benchmarks/programs/rodinia_streamcluster/oracles/boundary.stdout
+    stdout_oracle_sha256: 8ff7963436dce6fc3a483a5fa81aeffbf86368de962d317e59a55b7a919e5fbb
+  language: c++
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: file
+    path: centers.txt
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/rodinia_streamcluster/streamcluster.cpp
+  source_sha256_at_freeze: e017a359a8209e7d5062a1ba46c37bb5403bf320ba13d6177d8fc6b7020c2052
+  stderr: empty

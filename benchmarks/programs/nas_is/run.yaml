@@ -1,0 +1,51 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  expected_exit_code: 0
+  id: nas_is
+  inputs:
+  - args:
+    - benchmarks/programs/nas_is/inputs/nominal_a.in
+    id: nominal_a
+    oracle_path: benchmarks/programs/nas_is/oracles/nominal_a.stdout
+    oracle_sha256: ef4adee63fd2b4c996e7390cecf2ce958cc3973dc5f3d966e748e122e4793823
+  - args:
+    - benchmarks/programs/nas_is/inputs/nominal_b.in
+    id: nominal_b
+    oracle_path: benchmarks/programs/nas_is/oracles/nominal_b.stdout
+    oracle_sha256: e40f702ac71933022c214ddfff2a9fc46f959a6567425263d356481c4287c51a
+  - args:
+    - benchmarks/programs/nas_is/inputs/scale.in
+    id: scale
+    oracle_path: benchmarks/programs/nas_is/oracles/scale.stdout
+    oracle_sha256: a0a6a4fdb0719252ddae43e96c6447ef2d494b6c8b38ad75c5ff185e17dfb90b
+  - args:
+    - benchmarks/programs/nas_is/inputs/boundary.in
+    id: boundary
+    oracle_path: benchmarks/programs/nas_is/oracles/boundary.stdout
+    oracle_sha256: f3256f1dfb5e4341ca585aa040b6863ba79f1850c8378f28ce7309cbf7043f6b
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/nas_is/nas_is.c
+  source_sha256_at_freeze: 74e83fff3a29b73c33447b4396bc84b034acaf2360447bd0e47f9b108ccf8a1d
+  stderr: empty

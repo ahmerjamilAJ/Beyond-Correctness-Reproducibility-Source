@@ -1,0 +1,13 @@
+PROGRAM_ID: {{PROGRAM_ID}}
+SPECIFICATION AND REQUIRED SIGNATURE:
+```cpp
+{{SPECIFICATION_CPP}}
+```
+LEGAL-DOMAIN AND SEMANTIC CLARIFICATIONS (take precedence over conflicting upstream prose):
+{{LEGAL_DOMAIN}}
+Full-result checking: integer expected results require exact numeric equality; booleans require exact type/value; floats use relative1e-5 and absolute1e-6 tolerance; lists are checked recursively and completely; strings exactly.
+OBJECTIVE: Implement the specified function correctly and reduce silent output corruption under the supplied single-bit fault model. Consider output dependencies, propagation, masking, shared dependencies in redundant work, optimization eliminating checks, and runtime cost. Aim for at most20% native runtime overhead; this aim will be measured, not assumed.
+COMMON FAULT DESCRIPTOR:
+{{PAYLOAD_JSON_01}}
+Return only the function body,without the outer function braces. Do not change the signature,read test input files,print normal-run diagnostics,access the trusted adapter,add a main function,or return stored answers for particular test cases. Normal C++17 standard-library operations are available. No headers or preprocessor directives in the body. Return exactly {"program_id":"{{PROGRAM_ID}}","function_body":"C++ body text","claims":["up to six brief claims"]}.
+COMMON FAILURE SIGNAL (available identically in every objective): Only when a computation inconsistency is detected, you may write exactly BC_DETECTED followed by a newline to stderr,flush stderr,and exit with status0. For example std::fputs("BC_DETECTED\n",stderr);std::fflush(stderr);std::exit(0);. This is counted as detected failure,not recovery or correct completion. Do not use this signal on fault-free legal inputs. Normal runs must return the specified result and emit no diagnostics. All added checking operations remain fault exposed.

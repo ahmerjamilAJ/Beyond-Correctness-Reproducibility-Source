@@ -1,0 +1,53 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  - -DSMALL_DATASET
+  - -DPOLYBENCH_DUMP_ARRAYS
+  expected_exit_code: 0
+  id: polybench_fdtd2d
+  inputs:
+  - args:
+    - '2'
+    id: nominal_a
+    oracle_path: benchmarks/programs/polybench_fdtd2d/oracles/nominal_a.stdout
+    oracle_sha256: 605c48fd3dc6fb3b3a00d221f59326e0766fdff4b8f909536d290bd4f0e89617
+  - args:
+    - '3'
+    id: nominal_b
+    oracle_path: benchmarks/programs/polybench_fdtd2d/oracles/nominal_b.stdout
+    oracle_sha256: 779312acaf2bcf47ad1c467950ea45609942209cc5da7bbe439fb3c464f7808c
+  - args:
+    - '4'
+    id: scale
+    oracle_path: benchmarks/programs/polybench_fdtd2d/oracles/scale.stdout
+    oracle_sha256: 311680df7f2baa875a3ad3066c2144022165df2ddced4dc628680cf69700a20f
+  - args:
+    - '1'
+    id: boundary
+    oracle_path: benchmarks/programs/polybench_fdtd2d/oracles/boundary.stdout
+    oracle_sha256: f7e38b0e86c22fd8d2ab179c58e701ec6bc4837baeb2c5dd2631693f570b32c3
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/polybench_fdtd2d/fdtd_2d.c
+  source_sha256_at_freeze: a51aa3ed72de8ea872819335aff2f74cd539af1f4d1d0ec105b67992c1d2942c
+  stderr: empty

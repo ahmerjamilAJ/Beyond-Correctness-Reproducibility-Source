@@ -1,0 +1,83 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu++11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  expected_exit_code: 0
+  id: rodinia_srad
+  inputs:
+  - args:
+    - '16'
+    - '16'
+    - '0'
+    - '15'
+    - '0'
+    - '15'
+    - '1'
+    - '0.5'
+    - '2'
+    id: nominal_a
+    oracle_path: benchmarks/programs/rodinia_srad/oracles/nominal_a.stdout
+    oracle_sha256: a71b52914fea3d15ee68a31275f3bf2763c1470c4ded92cb8111ca086bf2af75
+  - args:
+    - '32'
+    - '32'
+    - '0'
+    - '31'
+    - '0'
+    - '31'
+    - '1'
+    - '0.5'
+    - '3'
+    id: nominal_b
+    oracle_path: benchmarks/programs/rodinia_srad/oracles/nominal_b.stdout
+    oracle_sha256: dc1424ee73f2a7d00cf2dae18e4ac2f1b2ccd9393fb6da2480b7e6be92600c6c
+  - args:
+    - '48'
+    - '48'
+    - '0'
+    - '47'
+    - '0'
+    - '47'
+    - '1'
+    - '0.5'
+    - '4'
+    id: scale
+    oracle_path: benchmarks/programs/rodinia_srad/oracles/scale.stdout
+    oracle_sha256: bb7e8e79b9f0474661d02a2264b0299ecc0458e8253939fd4e54f624949f65d4
+  - args:
+    - '64'
+    - '64'
+    - '0'
+    - '63'
+    - '0'
+    - '63'
+    - '1'
+    - '0.5'
+    - '5'
+    id: boundary
+    oracle_path: benchmarks/programs/rodinia_srad/oracles/boundary.stdout
+    oracle_sha256: 33be5efc72de0311e279f06b6aad4afc60336870142c95f6c1ad2d02092135b5
+  language: c++
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/rodinia_srad/srad.cpp
+  source_sha256_at_freeze: ecfad818934b60e0f038a465ed8aad5b203d461da279e1b26abe119e037cbd04
+  stderr: empty

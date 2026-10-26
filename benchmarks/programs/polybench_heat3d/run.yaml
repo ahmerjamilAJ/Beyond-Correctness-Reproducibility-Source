@@ -1,0 +1,53 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  - -DSMALL_DATASET
+  - -DPOLYBENCH_DUMP_ARRAYS
+  expected_exit_code: 0
+  id: polybench_heat3d
+  inputs:
+  - args:
+    - '2'
+    id: nominal_a
+    oracle_path: benchmarks/programs/polybench_heat3d/oracles/nominal_a.stdout
+    oracle_sha256: 279f2fbb6d5eed1f02e85221c497e2da3e7985458befd310e1730cb42392956a
+  - args:
+    - '3'
+    id: nominal_b
+    oracle_path: benchmarks/programs/polybench_heat3d/oracles/nominal_b.stdout
+    oracle_sha256: 98861eaa5d0ccb88044b72996888a3efdda2851950127afdd7f4b1cedfe33009
+  - args:
+    - '4'
+    id: scale
+    oracle_path: benchmarks/programs/polybench_heat3d/oracles/scale.stdout
+    oracle_sha256: 13a23bc70fd5ef0c19fddcd5aab065438bd6b225b13d41d762acd1680d248730
+  - args:
+    - '1'
+    id: boundary
+    oracle_path: benchmarks/programs/polybench_heat3d/oracles/boundary.stdout
+    oracle_sha256: edf18483dd15094cedf11e9b7c3c1582042098f10ba57dfbddbd5eb2792b980b
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/polybench_heat3d/heat_3d.c
+  source_sha256_at_freeze: 1fc55ebc0cdf70dd71b917af5b01bcee7b9a82e38f28f364c530f66b75cc7b56
+  stderr: empty

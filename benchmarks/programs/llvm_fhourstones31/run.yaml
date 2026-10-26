@@ -1,0 +1,49 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  expected_exit_code: 0
+  id: llvm_fhourstones31
+  inputs:
+  - args:
+    - benchmarks/programs/llvm_fhourstones31/inputs/nominal_a.in
+    id: nominal_a
+    oracle_path: benchmarks/programs/llvm_fhourstones31/oracles/nominal_a.stdout
+    oracle_sha256: 5c9a9fa213f9131e4ad22c1a0409d3e9cf8aa44f58fb2aac8e202a654ad7a2c8
+  - args:
+    - benchmarks/programs/llvm_fhourstones31/inputs/nominal_b.in
+    id: nominal_b
+    oracle_path: benchmarks/programs/llvm_fhourstones31/oracles/nominal_b.stdout
+    oracle_sha256: 64e77764df4cb2aee7b4e733a4eb858f0e8787e9ed0d5d7b6e5109081db2975e
+  - args:
+    - benchmarks/programs/llvm_fhourstones31/inputs/scale.in
+    id: scale
+    oracle_path: benchmarks/programs/llvm_fhourstones31/oracles/scale.stdout
+    oracle_sha256: 0eb57dccb310691c74c4e4a906e4833880523862b06fc1a433f1d4f879194a8f
+  - args:
+    - benchmarks/programs/llvm_fhourstones31/inputs/boundary.in
+    id: boundary
+    oracle_path: benchmarks/programs/llvm_fhourstones31/oracles/boundary.stdout
+    oracle_sha256: 34c661b6d2287d22021cf966de0896926e2cdf0fbc2c579cb8cd0bd2739dfc56
+  language: c
+  link_flags: []
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/llvm_fhourstones31/fhourstones31.c
+  source_sha256_at_freeze: ef01e7b802d0b0116ff9740e8a12f8fa4cd7df479997ec8351b795ed7d55a62c
+  stderr: empty

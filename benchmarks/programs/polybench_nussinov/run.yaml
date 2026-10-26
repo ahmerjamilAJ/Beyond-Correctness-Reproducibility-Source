@@ -1,0 +1,53 @@
+# Build and input settings for this benchmark.
+fault_policy:
+  excluded_opcodes:
+  - ret
+  - alloca
+  - call
+  - phi
+  - store
+  - br
+  - switch
+  - unreachable
+schema_version: 1
+workloads:
+- compile_flags:
+  - -std=gnu11
+  - -O1
+  - -g
+  - -ffp-contract=off
+  - -DSMALL_DATASET
+  - -DPOLYBENCH_DUMP_ARRAYS
+  expected_exit_code: 0
+  id: polybench_nussinov
+  inputs:
+  - args:
+    - '2'
+    id: nominal_a
+    oracle_path: benchmarks/programs/polybench_nussinov/oracles/nominal_a.stdout
+    oracle_sha256: 370b24a0c392bfffbc62688b947581257c5c9e05420f690a5cdf1baa0ab0de0c
+  - args:
+    - '3'
+    id: nominal_b
+    oracle_path: benchmarks/programs/polybench_nussinov/oracles/nominal_b.stdout
+    oracle_sha256: fc84563eecfe39a7c4a3304803fc662d85761cce8a0c07c0722a03d4ce857aaf
+  - args:
+    - '4'
+    id: scale
+    oracle_path: benchmarks/programs/polybench_nussinov/oracles/scale.stdout
+    oracle_sha256: ee5bff6a27d31fec7d0d257becc6f345b0eb5bbf25a2f347470a51f22e6fa30e
+  - args:
+    - '1'
+    id: boundary
+    oracle_path: benchmarks/programs/polybench_nussinov/oracles/boundary.stdout
+    oracle_sha256: d3a73103400717a24369e234d31f89545cf6d88be368f0163c7bd9d0db1e8cc7
+  language: c
+  link_flags:
+  - -lm
+  output:
+    comparator: exact_bytes
+    kind: stdout
+  selected_for_targeted_fi: true
+  source: benchmarks/programs/polybench_nussinov/nussinov.c
+  source_sha256_at_freeze: 59967c0c90567786be03bb5bf0fb3d5b66e4d92c268e85808c28686b8a2fa30b
+  stderr: empty
