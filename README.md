@@ -1,6 +1,6 @@
 # Beyond Correctness: companion methods
 
-This repository contains final prompts, reported model settings, a CPU benchmark catalog with available source and inputs, generic LLVM fault-injection scripts, and basic analysis. It contains no model responses, generated programs, original fault-injection results, or inference code.
+This repository contains final prompts, reported model settings, a CPU benchmark catalog with available source and inputs, generic LLVM fault-injection scripts, and basic analysis. 
 
 ## Benchmarks
 
